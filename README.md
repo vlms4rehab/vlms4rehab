@@ -20,5 +20,5 @@ Project website for the paper "The Potential and Limitations of Vision-Language 
 ## Links
 
 - **Paper**: [arXiv](https://arxiv.org/) (Update with actual link)
-- **Code**: [GitHub](https://github.com/livctr/cvfm4rehab)
+- **Code**: [GitHub](https://github.com/livctr/vlms4rehab)
 - **Dataset**: Available upon reasonable request and IRB approval
