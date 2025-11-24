@@ -1,59 +1,476 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLMs for Human Motion Understanding: A Case Study in Stroke Rehabilitation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners -->
+  <meta name="description" content="Exploring the potential and limitations of Vision-Language Models for human motion understanding in stroke rehabilitation">
+  <meta property="og:title" content="VLMs for Human Motion Understanding: A Case Study in Stroke Rehabilitation" />
+  <meta property="og:description" content="Evaluating Vision-Language Models for dose and impairment quantification in stroke rehabilitation" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="static/images/fig1.png?v=2" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+  <meta name="twitter:title" content="VLMs for Human Motion Understanding in Stroke Rehabilitation">
+  <meta name="twitter:description" content="Evaluating Vision-Language Models for dose and impairment quantification">
+  <meta name="twitter:image" content="static/images/fig1.png?v=2">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="Vision-language models, stroke rehabilitation, prompt engineering, action recognition, human motion understanding, VLMs, digital health">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 60px 40px;
-            max-width: 900px;
-            text-align: center;
-        }
+  <title>VLMs for Human Motion Understanding: A Case Study in Stroke Rehabilitation</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
-        h1 {
-            font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .container {
-                padding: 40px 20px;
-            }
-        }
-    </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>VLMs for Human Motion Understanding: A Case Study in Stroke Rehabilitation</h1>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">The Potential and Limitations of Vision-Language Models for Human Motion Understanding: A Case Study in Data-Driven Stroke Rehabilitation
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://livctr.github.io/" target="_blank">Victor Li</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://itsnav.com/" target="_blank">Naveenraj Kamalakannan</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="" target="_blank">Avinash Parnandi</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="" target="_blank">Heidi Schambra</a><sup>4,5*</sup>,</span>
+              <span class="author-block">
+                <a href="https://math.nyu.edu/~cfgranda/" target="_blank">Carlos Fernandez-Granda</a><sup>1,6*</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>NYU Center for Data Science<br></span>
+              <span class="author-block"><sup>2</sup>NYU Tandon School of Engineering<br></span>
+              <span class="author-block"><sup>3</sup>VitalConnect<br></span>
+              <span class="author-block"><sup>4</sup>NYU Grossman School of Medicine, Department of Neurology<br></span>
+              <span class="author-block"><sup>5</sup>NYU Grossman School of Medicine, Department of Rehabilitation Medicine<br></span>
+              <span class="author-block"><sup>6</sup>NYU Courant Institute of Mathematical Sciences<br></span>
+              <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/livctr/cvfm4rehab" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Dataset link -->
+                <!-- Removed: No public dataset available -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Vision–language models (VLMs) have demonstrated remarkable performance across a wide range of computer-vision tasks, sparking interest in their potential for digital health applications. Here, we apply VLMs to two fundamental challenges in data-driven stroke rehabilitation: automatic quantification of rehabilitation dose and impairment from videos. We formulate these problems as motion-identification tasks, which can be addressed using VLMs. We evaluate our proposed framework on a cohort of <b>29 healthy controls and 51 stroke survivors</b>. Our results show that current VLMs lack the fine-grained motion understanding required for precise quantification: dose estimates are comparable to a baseline that excludes visual information, and impairment scores cannot be reliably predicted. Nevertheless, several findings suggest future promise. With optimized prompting and post-processing, VLMs can classify high-level activities from a few frames, detect motion and grasp with moderate accuracy, and approximate dose counts within 25% of ground truth for mildly impaired and healthy participants, all <b>without task-specific training or finetuning</b>. These results highlight both the current limitations and emerging opportunities of VLMs for data-driven stroke rehabilitation and broader clinical video analysis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <!-- Overview Figure -->
+  <section class="section hero is-light2">
+    <div class="container is-fluid">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <div class="columns is-centered" style="margin-top: 2em;">
+              <div class="column is-10">
+                <img src="static/images/fig1.png?v=2" alt="VLMs for Stroke Rehabilitation Overview"
+                  style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+              </div>
+            </div>
+            <p style="text-align: center; margin-top: 8px;">
+              <a href="static/images/fig1.png?v=2" target="_blank">Open full-size figure</a>
+            </p>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 20px; color: #333;">
+              <b>Vision-Language Models (VLMs) for Data-Driven Stroke Rehabilitation.</b> <b>(a)</b> A VLM functions as a video question-answering system, processing image frames and text prompts through a transformer-based backbone to generate text outputs. <b>(b)</b> <i>Activity identification:</i> The VLM classifies rehabilitation activities from 8 uniformly sampled frames and activity descriptions. <b>(c)</b> <i>Dose quantification:</i> Video segments are classified into five functional primitives to measure rehabilitation dose through primitive counting. <b>(d)</b> <i>Impairment quantification:</i> The VLM processes Fugl-Meyer Assessment videos to estimate impairment scores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Overview -->
+
+  <!-- Motivation -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Why VLMs for Stroke Rehabilitation?</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              We study video‑based stroke rehabilitation along two clinically grounded measurements: <b>dose</b>, computed from a sequence of five functional primitives (<i>reach, reposition, transport, stabilize, idle</i>), and <b>impairment</b>, assessed with the upper‑extremity Fugl–Meyer Assessment (FMA). Both require fine‑grained motion understanding: sub‑second wrist/hand movements, consistent left/right reasoning, and robustness to variations in viewpoint, lighting, and workspace while high‑quality frame‑level annotations are scarce and costly.
+            </p>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 12px; color: #333;">
+              Vision–language models (VLMs) offer a potential route because prompts encode task instructions and the models are trained on diverse visual data. We therefore ask - <i>without task‑specific training</i> - how far open‑source VLMs can go on three practical tasks: (1) activity identification from a few frames, (2) primitive identification for dose estimation, and (3) FMA item scoring.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Motivation -->
+
+  <!-- Task 1: Activity Identification -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Task 1: Activity Identification</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              As a proof of concept, we first evaluated VLMs on identifying high-level rehabilitation activities from video. We tested on <b>640 videos</b> featuring 9 activities: brushing teeth, combing hair, applying deodorant, drinking water, washing face, eating, putting on/taking off glasses, and performing repetitive target-directed movements (radial tabletop task and shelf).
+            </p>
+            
+            <div style="display: flex; justify-content: space-between; gap: 2em; margin-top: 2em;">
+              <div style="flex: 1;">
+                <img src="static/images/identification_cm_qwen2_5_vl_7b_direct.png" alt="Direct Prompting" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 14px; margin-top: 0.5em;"><b>Direct Prompting:</b> 53.4% accuracy</p>
+              </div>
+              <div style="flex: 1;">
+                <img src="static/images/identification_cm_qwen2_5_vl_7b_tuned.png" alt="Optimized Prompting" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 14px; margin-top: 0.5em;"><b>Optimized Prompting:</b> 77.5% accuracy</p>
+              </div>
+            </div>
+
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 20px; color: #333;">
+              <b>Key Finding:</b> VLMs can accurately classify high-level activities from just 8 frames, especially when prompts are optimized using held-out data. Prompt optimization improved Qwen2.5-VL-7B-Instruct from 53.4% to <b>77.5% accuracy</b>. Common mistakes involved confusing activities with similar motions or small objects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Task 1 -->
+
+  <!-- Task 2: Dose Quantification -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Task 2: Dose Quantification</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              We formulated dose quantification as identification of five <b>functional primitives</b>: <i>reach</i> (move to contact a target object), <i>reposition</i> (move without future contact), <i>transport</i> (move a grasped object), <i>stabilize</i> (hold an object still), and <i>idle</i> (stand at ready). Rehabilitation dose is measured by counting these primitives.
+            </p>
+
+            <div style="margin-top: 2em; margin-bottom: 1em;">
+              <h3 class="title is-5">Performance Across 15 VLMs</h3>
+              <p style="text-align: justify; font-size: 14px; line-height: 1.5; color: #666; margin-bottom: 1em;">
+                We evaluated 15 state-of-the-art VLMs from 6 model families (LLaVA-NeXT-Video, LLaVA-OneVision, NVILA, Qwen2.5-VL, InternVL3, InternVL3.5). The best models achieved only <b>slightly better performance than a Markov baseline</b> that doesn't use visual information, highlighting the difficulty of fine-grained motion understanding.
+              </p>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 2em;">
+              <div>
+                <img src="static/images/rce_breakdown.png" alt="RCE Breakdown" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 13px; margin-top: 0.5em;"><b>(a)</b> Relative counting error by activity</p>
+              </div>
+              <div>
+                <img src="static/images/motion_grasp_f1_by_activity.png" alt="Motion and Grasp F1" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 13px; margin-top: 0.5em;"><b>(b)</b> F1 scores for motion and grasp detection</p>
+              </div>
+              <div>
+                <img src="static/images/segment_count_ratio.png" alt="Segment Count Ratio" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 13px; margin-top: 0.5em;"><b>(c)</b> Over-segmentation: 1.5-4× more predicted segments</p>
+              </div>
+              <div>
+                <img src="static/images/left_v_right_activation_results.png" alt="Left vs Right" style="width: 100%; height: auto;">
+                <p style="text-align: center; font-size: 13px; margin-top: 0.5em;"><b>(d)</b> VLMs struggle to distinguish left from right hand</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 2em;">
+              <h3 class="title is-5">Structured Tasks: RTT and Shelf</h3>
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333; margin-bottom: 1em;">
+                For highly structured repetitive tasks, we developed <b>PRIM‑RS</b> (Pose‑Refined promptIng Module RTT/Shelf), combining VLMs with pose‑guided hand cropping and light post‑processing. This achieved <b>~25% counting error</b> for reach, reposition, and idle primitives in healthy and mildly impaired subjects.
+              </p>
+              <div style="text-align: center; margin-top: 1.5em;">
+                <img src="static/images/repetition_counts_scatter.png" alt="Repetition Counts" style="width: 90%; height: auto;">
+                <p style="text-align: center; font-size: 13px; margin-top: 0.5em;">Predicted vs. ground-truth primitive counts for RTT and shelf tasks</p>
+              </div>
+            </div>
+
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 20px; color: #333;">
+              <b>Key Finding:</b> Current VLMs can detect motion and grasp with moderate accuracy (F1 > 0.7), but this is <b>insufficient for precise dose quantification</b>. Major challenges include over-segmentation, inability to distinguish left/right hands, and difficulty with speed-dependent primitives. However, for structured tasks, careful engineering can achieve reasonable performance for healthy and mildly impaired individuals.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Task 2 -->
+
+  <!-- PRIM-RS: Method Summary -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">PRIM‑RS: Pose‑Refined Prompting for Structured Tasks</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              PRIM‑RS is a lightweight pipeline tailored for repetitive tasks (RTT, shelf). It keeps prompting simple and adds minimal structure where models struggled most.
+            </p>
+            <ul style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333; margin-left: 1.5em;">
+              <li><b>Pose‑guided cropping:</b> Use 2D keypoints to crop around the target hand; skip cropping if keypoints are unreliable.</li>
+              <li><b>Idle and grasp states:</b> Replace “motion?” with a more stable “idle?” prompt; track grasp consistently across segments.</li>
+              <li><b>Light smoothing:</b> Smooth idle/grasp to avoid rapid flips; insert short reach/reposition where transitions require them.</li>
+              <li><b>Stillness cue:</b> Within “holding” regions, detect stillness to assign stabilize; otherwise assign transport.</li>
+            </ul>
+            <p style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333; margin-top: 6px;">
+              This yields the improvements reported above without model finetuning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End PRIM-RS -->
+
+  <!-- Task 3: Impairment Quantification -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Task 3: Impairment Quantification</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              We evaluated VLMs on the <b>Fugl-Meyer Assessment (FMA)</b>, a standardized 33-item clinical scale (scored 0-66) for quantifying motor impairment after stroke. Each item assesses specific movements, with scores of 0 (worst), 1, or 2 (best).
+            </p>
+
+            <div style="display: flex; justify-content: space-between; gap: 2em; margin-top: 2em; align-items: center;">
+              <div style="flex: 1;">
+                <img src="static/images/fm_score_comparison_qa_vs_cot.png" alt="FMA Score Comparison" style="width: 100%; height: auto;">
+              </div>
+              <div style="flex: 1;">
+                <img src="static/images/fm_section_errs_qa_vs_cot.png" alt="FMA Section Errors" style="width: 100%; height: auto;">
+              </div>
+            </div>
+
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 20px; color: #333;">
+              <b>Key Finding:</b> VLMs <b>fail at impairment quantification</b>. Predicted FMA scores are essentially constant across severity levels, and performance is comparable to a non-informative baseline that always predicts a score of 1. This holds for both Question-Answering (QA) and Chain-of-Thought (CoT) prompting strategies, evaluated on 28 subjects across all impairment levels.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Task 3 -->
+
+  <!-- Discussion and Failure Modes -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Discussion: Why Do VLMs Struggle?</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              Where models failed, the issues were specific and repeatable:
+            </p>
+            <ul style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333; margin-left: 1.5em;">
+              <li><b>Small, brief motions:</b> Twisting/rotating at the wrist often went undetected, hurting face‑wash and feeding.</li>
+              <li><b>Left/right targeting:</b> When one hand moved and the other was still, models frequently reported motion in both.</li>
+              <li><b>Over‑segmentation:</b> Primitive predictions flipped too often across adjacent segments without temporal smoothing.</li>
+              <li><b>Contact reasoning:</b> Grasp was sometimes predicted when the hand hovered near objects without contact.</li>
+            </ul>
+            <p style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333; margin-top: 10px;">
+              Simple engineering helped in structured settings: pose‑guided cropping localized the relevant hand, “idle” detection stabilized predictions, and smoothing reduced flips. These ingredients form PRIM‑RS.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Discussion -->
+
+  <!-- Cohort Information -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Dataset and Cohort</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              This study is based on a cohort of <b>80 individuals</b>: 29 healthy subjects and 51 stroke survivors (classified as mild, moderate, or severe based on FMA scores). The dataset includes:
+            </p>
+            <ul style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333; margin-left: 2em;">
+              <li><b>3,448 video trials</b> recorded at 1088×704 pixels, 60-100 FPS, from two camera angles</li>
+              <li><b>Rehabilitation videos:</b> 9 activities of daily living, including repetitive target-directed movements (RTT, shelf)</li>
+              <li><b>FMA videos:</b> 33 movement items performed under expert supervision</li>
+              <li><b>Annotations:</b> Per-frame primitive labels with Cohen's kappa ≥0.96 between labelers and experts</li>
+              <li><b>Demographics:</b> Age 59.2±13.7 years; 38 male, 42 female; diverse racial composition</li>
+            </ul>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 15px; color: #333;">
+              The study received IRB approval from NYU Grossman School of Medicine, and all participants provided written informed consent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Cohort -->
+
+  <!-- Models Evaluated -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Models Evaluated</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              We evaluated <b>15 state-of-the-art open-source VLMs</b> from 6 model families, ranging from 0.5B to 78B parameters:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; margin: 1.5em 0;">
+              <div style="background-color: #f5f5f5; padding: 1em; border-radius: 5px;">
+                <h4 style="font-weight: bold; margin-bottom: 0.5em;">LLaVA Family</h4>
+                <p style="font-size: 14px;">LLaVA-NeXT-Video (7B, 72B)<br>LLaVA-OneVision (0.5B, 7B, 72B)</p>
+              </div>
+              <div style="background-color: #f5f5f5; padding: 1em; border-radius: 5px;">
+                <h4 style="font-weight: bold; margin-bottom: 0.5em;">Qwen Family</h4>
+                <p style="font-size: 14px;">Qwen2.5-VL-Instruct (7B, 32B, 72B)</p>
+              </div>
+              <div style="background-color: #f5f5f5; padding: 1em; border-radius: 5px;">
+                <h4 style="font-weight: bold; margin-bottom: 0.5em;">InternVL</h4>
+                <p style="font-size: 14px;">InternVL3 (78B)<br>InternVL3.5 (2B, 8B, 38B, 30B-A3B)</p>
+              </div>
+              <div style="background-color: #f5f5f5; padding: 1em; border-radius: 5px;">
+                <h4 style="font-weight: bold; margin-bottom: 0.5em;">NVIDIA NVILA</h4>
+                <p style="font-size: 14px;">NVILA (8B, 15B)</p>
+              </div>
+            </div>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+              All models were evaluated using the <code>lmms_eval</code> framework with greedy decoding (selecting the most probable token at each step).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Models -->
+
+  <!-- Results Leaderboard -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">PRIM-RS Results (Dose Quantification)</h2>
+          <div class="content has-text-justified">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; align-items: center;">
+              <div>
+                <h3 class="title is-5" style="margin-bottom: 0.6em;">PRIM-RS (RTT & Shelf)</h3>
+                <p style="text-align: justify; font-size: 15px; line-height: 1.6; color: #333;">
+                  Pose‑Refined promptIng Module (PRIM‑RS) combines VLM prompting with pose‑guided hand cropping and light post‑processing tuned for repetitive, structured tasks.
+                </p>
+                <ul style="font-size: 15px; line-height: 1.6; color: #333; margin-left: 1.2em; margin-top: 0.6em;">
+                  <li><b>Edit Score (↑):</b> 67.75 ± 3.26</li>
+                  <li><b>Action Error Rate (↓):</b> 0.42 ± 0.05</li>
+                  <li><b>Relative Counting Error (↓):</b> 0.40 ± 0.06</li>
+                </ul>
+                <p style="font-size: 13px; color: #666; margin-top: 8px;">
+                  Evaluated on 38 videos (RTT/shelf) across healthy and stroke cohorts.
+                </p>
+              </div>
+              <div style="text-align: center;">
+                <img src="static/images/repetition_counts_scatter.png" alt="PRIM-RS Counts"
+                  style="width: 100%; max-width: 520px; height: auto;">
+                <p class="caption">Predicted vs ground-truth primitive counts with PRIM‑RS.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Results Leaderboard -->
+
+  <!-- Conclusion -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p style="text-align: justify; font-size: 16px; line-height: 1.6; color: #333;">
+              VLMs handle high‑level activity ID from a few frames, but fall short on fine‑grained motion needed for dose and impairment. With simple structure pose‑guided crops, stable idle/grasp states, and smoothing PRIM‑RS makes structured tasks (RTT/shelf) workable without finetuning. General, unstructured settings remain challenging.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Conclusion -->
+
+  <!--BibTex citation -->
+  <section class="section hero is-light" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{li2025vlms4rehab,
+  title={The Potential and Limitations of Vision-Language Models for Human Motion Understanding: A Case Study in Data-Driven Stroke Rehabilitation},
+  author={Li, Victor and Kamalakannan, Naveenraj and Parnandi, Avinash and Schambra, Heidi and Fernandez-Granda, Carlos},
+  journal={arXiv preprint},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
 </body>
+
 </html>
